@@ -14,3 +14,5 @@ build/
 
 ### Logs ###
 *.log
+# Ignore Gradle build output directory
+build
