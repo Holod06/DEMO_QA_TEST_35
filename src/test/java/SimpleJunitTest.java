@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.Sleeper;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -34,9 +35,10 @@ public class SimpleJunitTest {
         $("#userEmail").setValue("holod06@yandex.ru");
         $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("9958332203");
-        $("[id=dateOfBirthInput]").sendKeys(Keys.CONTROL + "A");
-        $("[id=dateOfBirthInput]").sendKeys(SPACE);
-        $("#dateOfBirthInput").setValue("6 January 1999").pressEnter();
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").$(byText("January")).click();
+        $(".react-datepicker__year-select").$(byText("1999")).click();
+        $(".react-datepicker__month").$(byText("6")).click();
         $("#subjectsInput").setValue("Arts").pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("retouch.jpg");
