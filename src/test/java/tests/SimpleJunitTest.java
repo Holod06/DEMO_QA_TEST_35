@@ -26,7 +26,7 @@ public class SimpleJunitTest extends TestBase {
                 .setEmail("holod06@yandex.ru")
                 .setGender("Other")
                 .setUserNumber("7958332203")
-                .setDateOfBirth("06", "January", "1999")
+                .setDateOfBirth("6", "January", "1999")
                 .setSubject("Arts")
                 .setHobbies("Sports")
                 .uploadPhoto()
@@ -74,4 +74,3 @@ public class SimpleJunitTest extends TestBase {
         registrationPage.checkUnsubmitedForm();
     }
 }
-

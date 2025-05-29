@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
+import pages.components.ResultTableComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -10,23 +11,24 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
 
-    private SelenideElement firstNameInput = $("#firstName"),
-     lastNameInput = $("#lastName"),
-     userEmailInput = $ ("#userEmail"),
-     genterWrapper = $("#genterWrapper"),
-     userNumberInput =  $("#userNumber"),
-     calendarInput =  $("#dateOfBirthInput"),
-     subjectInput = $("#subjectsInput"),
-     selectHobbies = $("#hobbiesWrapper"),
-     uploadPicture = $("#uploadPicture"),
-     currentAdressInput = $("#currentAddress"),
-     stateDropdown = $("#state"),
-     cityDropdown = $("#city"),
-     submitButton = $("#submit");
+    private final SelenideElement firstNameInput = $("#firstName"),
+            lastNameInput = $("#lastName"),
+            userEmailInput = $("#userEmail"),
+            genterWrapper = $("#genterWrapper"),
+            userNumberInput = $("#userNumber"),
+            calendarInput = $("#dateOfBirthInput"),
+            subjectInput = $("#subjectsInput"),
+            selectHobbies = $("#hobbiesWrapper"),
+            uploadPicture = $("#uploadPicture"),
+            currentAdressInput = $("#currentAddress"),
+            stateDropdown = $("#state"),
+            cityDropdown = $("#city"),
+            submitButton = $("#submit");
 
     CalendarComponent calendarComponent = new CalendarComponent();
+    ResultTableComponent resultTable = new ResultTableComponent();
 
-    public RegistrationPage openPage(){
+    public RegistrationPage openPage() {
         open("automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('fixedban').remove()");
@@ -34,6 +36,7 @@ public class RegistrationPage {
 
         return this;
     }
+
     public RegistrationPage setFirstName(String value) {
         firstNameInput.setValue(value);
 
@@ -64,12 +67,13 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setDateOfBirth(String day, String month, String year){
+    public RegistrationPage setDateOfBirth(String day, String month, String year) {
         calendarInput.click();
         calendarComponent.setDate(day, month, year);
 
         return this;
     }
+
 
     public RegistrationPage setSubject(String value) {
         subjectInput.setValue(value).pressEnter();
@@ -77,7 +81,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setHobbies (String value) {
+    public RegistrationPage setHobbies(String value) {
         selectHobbies.$(byText(value)).click();
         return this;
     }
@@ -87,7 +91,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setAdress (String value) {
+    public RegistrationPage setAdress(String value) {
         currentAdressInput.setValue(value);
 
         return this;
@@ -111,14 +115,11 @@ public class RegistrationPage {
         submitButton.click();
     }
 
-    public RegistrationPage checkResult(String key, String value){
-        $(".table-responsive").$(byText(key)).parent()
-                .shouldHave(text(value));
-
-        return this;
+    public ResultTableComponent checkResult(String key, String value){
+        return resultTable.checkResult(key, value);
     }
 
     public void checkUnsubmitedForm() {
-        $("#app").shouldNotHave(text("Thanks for submitting the form"));
+        resultTable.checkUnsubmitedForm();
     }
 }
