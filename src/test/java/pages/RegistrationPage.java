@@ -86,8 +86,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage uploadPhoto() {
-        uploadPicture.uploadFromClasspath("retouch.jpg");
+    public RegistrationPage uploadPhoto(String value) {
+        uploadPicture.uploadFromClasspath(value);
         return this;
     }
 
